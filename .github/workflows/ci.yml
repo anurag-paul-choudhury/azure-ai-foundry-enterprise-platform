@@ -39,8 +39,17 @@ jobs:
           chmod +x ./bicep
           sudo mv ./bicep /usr/local/bin/bicep
 
-      - name: Compile Bicep infrastructure
+      - name: Compile main infrastructure
         run: bicep build infrastructure/main.bicep --outfile /tmp/main.json
 
+      - name: Validate development parameters
+        run: bicep build-params infrastructure/parameters/dev.bicepparam --outfile /tmp/dev.json
+
+      - name: Validate testing parameters
+        run: bicep build-params infrastructure/parameters/test.bicepparam --outfile /tmp/test.json
+
+      - name: Validate production parameters
+        run: bicep build-params infrastructure/parameters/prod.bicepparam --outfile /tmp/prod.json
+
       - name: Validation completed
-        run: echo "Security tests and Bicep compilation completed successfully."
+        run: echo "All security tests and infrastructure configurations passed."
