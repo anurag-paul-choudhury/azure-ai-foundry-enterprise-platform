@@ -1,0 +1,1 @@
+[![CI Status](https://github.com/anurag-paul-choudhury/azure-ai-foundry-enterprise-platform/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/anurag-paul-choudhury/azure-ai-foundry-enterprise-platform/actions/workflows/ci.yml)
