@@ -1,0 +1,15 @@
+# Secrets
+.env
+
+# Python virtual environment
+venv/
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+
+# Local database and logs
+*.db
+*.sqlite3
+*.log

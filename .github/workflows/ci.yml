@@ -1,0 +1,46 @@
+name: Enterprise AI Infrastructure CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+  pull_request:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  validate-infrastructure:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+
+      - name: Run security unit tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Run security policy validator
+        run: python security/policy_validator.py
+
+      - name: Install Bicep CLI
+        run: |
+          curl -Lo bicep https://github.com/Azure/bicep/releases/download/v0.48.1/bicep-linux-x64
+          chmod +x ./bicep
+          sudo mv ./bicep /usr/local/bin/bicep
+
+      - name: Compile Bicep infrastructure
+        run: bicep build infrastructure/main.bicep --outfile /tmp/main.json
+
+      - name: Validation completed
+        run: echo "Security tests and Bicep compilation completed successfully."
