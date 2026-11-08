@@ -33,6 +33,9 @@ jobs:
       - name: Run security policy validator
         run: python security/policy_validator.py
 
+      - name: Run network security validator
+        run: python security/network_validator.py
+
       - name: Install Bicep CLI
         run: |
           curl -Lo bicep https://github.com/Azure/bicep/releases/download/v0.48.1/bicep-linux-x64
